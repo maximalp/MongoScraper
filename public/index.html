@@ -1,49 +1,59 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html class="has-navbar-fixed-top" lang="en-us">
   <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Mongo Scraper</title>
-    <style>
-      body { background-color:lemonchiffon }
-      #wrapper {
-        width: 960px;
-        margin-left: auto;
-        margin-right: auto;
-        padding-top: 5%;
-      }
-      #articles {
-        display: inline-block;
-        overflow: auto;
-        width: 60%;
-        height: 700px;
-      }
-      #notes {
-        float: right;
-        width: 30%;
-      }
-      textarea, input {
-        display: block;
-        width: 100%;
-        background-color: #FCF5C7;
-      }
-      input {
-        height: 36px;
-        font-size: 24px;
-      }
-      textarea {
-        height: 200px;
-        font-size: 18px;
-      }
-    </style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.1/css/bulma.min.css">
+    <link rel="stylesheet" href="../public/styles.css" type="text/css"/>
   </head>
-  <body>
-    <div id="wrapper">
-      <h1 style="text-align:center; color:darksalmon">Mongo Scraper Test Page</h1>
-      <button id="articleCall" type="button">Click for Articles</button>
-      <h2><i>Articles Below for testing.</i></h2>
-      <div id="articles"></div>
-      <div id="notes"></div>
+
+<body>
+  <nav class="navbar is-fixed-top is-primary" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a class="navbar-item">
+      <span>Mongo Scraper</span>
+      </a>
     </div>
+      <div class="navbar-menu">
+        <div class="navbar-start">
+            <hr class="navbar-divider"></hr>
+            <a class="navbar-item is-lrg">
+              Home
+            </a>
+            <a class="navbar-item is-lrg">
+              Saved Articles
+            </a>
+            <div class="navbar-item is-lrg">
+              <a class="button is-link" id="scrapeButton">
+              Scrape New Articles!
+              </a>
+            </div>
+
+          <!-- navbar items -->
+        </div>
+      <!-- navbar items, navbar burger... -->
+    </div>
+
+
+  </nav>
+
+
+
+  <div class="container is-fluid">
+    <div class="box articles" id="articles">
+          <h1></h1>
+          <p></p>
+
+        </div>
+        <div id="articles2"></div>
+        <div id="notes"></div>
+  </div>
+
+
+
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="app.js"></script>
   </body>

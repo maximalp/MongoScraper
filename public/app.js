@@ -1,12 +1,76 @@
 // Grab the articles as a json
 
-$(document).on("click", "#articleCall",function() {
+$(document).on("click", "#scrapeButton", function() {
   //console.log("scrape page call not coming");
 $.getJSON("/scrape", function(data) {
   // For each one
   for (var i = 0; i < data.length; i++) {
     // Display the apropos information on the page
-    $("#articles").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].link + "</p>");
+
+
+    let titleLinked = $('<a>').attr('href', data[i].link).text(data[i].title)
+    .click(function(){window.open(this.href);
+    return false;
+    });;
+
+    let button = $("<button>").text("Save Article");
+
+    button.addClass("is-primary");
+
+    let d = $("<div>");
+    let p = $("<p>").append(titleLinked).append("<br/>" + "<br/>" + data[i].summary);
+
+    d.append(p).append(button);
+
+    $("#articles").append(d).append("<br>" + "</br>");
+
+
+button.on("click", function()
+{
+  $.ajax({
+    method: "POST",
+    url: "/articles/" + thisId,
+    data: {
+      // Value taken from title input
+      title: $("#titleinput").val(),
+      // Value taken from note textarea
+      body: $("#bodyinput").val()
+    }
+  })
+    // With that done
+    .done(function(data) {
+      // Log the response
+      console.log(data);
+      // Empty the notes section
+      $("#notes").empty();
+    });
+
+});
+
+
+
+
+
+  //  jQuery('<div>').append(jQuery('<a>').attr('href', 'url').text('blah')).html()
+
+    //$("#articles").append("<p>")
+
+
+    //$('#ItemFields').append($('<label></label>')
+      //  .attr('for', 'Item["' + count + ']')
+        //.value('your label text here'));
+
+
+    // variable for a title with a link to article
+
+    //$("#articles").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].link + "</p>");
+    //$("#articles").append("<div>" + "<br/>" +  "</br>" +  "<br/>" + data[i].summary + "</p>");
+
+
+    //('<a>').attr('href', 'url').text('blah')
+
+
+
   };
 });
 });
