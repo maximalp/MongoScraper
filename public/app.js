@@ -2,50 +2,58 @@
 
 $(document).on("click", "#scrapeButton", function() {
   //console.log("scrape page call not coming");
-$.getJSON("/scrape", function(data) {
-  // For each one
-  for (var i = 0; i < data.length; i++) {
-    // Display the apropos information on the page
+    $.getJSON("/scrape", function(data) {
+      // For each one
+      for (var i = 0; i < data.length; i++) {
+        // Display the apropos information on the page
 
 
-    let titleLinked = $('<a>').attr('href', data[i].link).text(data[i].title)
-    .click(function(){window.open(this.href);
-    return false;
-    });;
+        let titleLinked = $('<a>').attr('href', data[i].link).text(data[i].title)
+        .click(function(){window.open(this.href);
+        return false;
+        });;
 
-    let button = $("<button>").text("Save Article");
+        let button = $("<button>").text("Save Article").addClass("button is-primary");
 
-    button.addClass("is-primary");
+        //button.addClass("is-primary");
+        button.data("article", data[i]);
 
-    let d = $("<div>");
-    let p = $("<p>").append(titleLinked).append("<br/>" + "<br/>" + data[i].summary);
+        let d = $("<div>").addClass("box");
+        let p = $("<p>").append(titleLinked).append("<br/>" + "<br/>" + data[i].summary);
 
-    d.append(p).append(button);
+        d.append(p).append(button);
 
-    $("#articles").append(d).append("<br>" + "</br>");
+        $("#articles").append(d).append("<br>" + "</br>");
 
 
-button.on("click", function()
-{
-  $.ajax({
-    method: "POST",
-    url: "/articles/" + thisId,
-    data: {
-      // Value taken from title input
-      title: $("#titleinput").val(),
-      // Value taken from note textarea
-      body: $("#bodyinput").val()
-    }
-  })
+      button.on("click", function()
+      {
+        let article = $(this).data("article");
+        let button = this;
+        $.ajax({
+          method: "POST",
+          url: "/article",
+          data: article
+        })
+
     // With that done
-    .done(function(data) {
-      // Log the response
-      console.log(data);
-      // Empty the notes section
-      $("#notes").empty();
-    });
+        .done(function(savedArticleData) {
+          // Log the response
+          console.log(savedArticleData);
 
-});
+          const index = data.indexOf(article);
+
+          if (index !== -1) {
+              data.splice(index, 1);
+              }
+
+           let parent = $(button).parent();
+           $(parent).remove();
+
+          // Empty the notes section
+      //    $("#notes").empty();
+        });
+      });
 
 
 
@@ -73,6 +81,24 @@ button.on("click", function()
 
   };
 });
+});
+
+
+$(document).on("click", "#deleteButton", function() {
+
+console.log("trying to click button");
+let articleId = $(this).attr("data-id");
+console.log("articleId is " + articleId);
+
+  $.ajax({
+    method: "DELETE",
+    url: "/articles/" + articleId
+  })
+  .done(function(data) {
+
+  console.log("deleted article " + articleId);
+  });
+
 });
 
 

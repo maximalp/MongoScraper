@@ -28,6 +28,19 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // Use express.static to serve the public folder as a static directory
 app.use(express.static("public"));
 
+
+// Set Handlebars.
+var exphbs = require("express-handlebars");
+
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
+
+// Import routes and give the server access to them.
+//var routes = require("./controllers/burgers_controller.js");
+
+//app.use("/", routes);
+
+
 // Set mongoose to leverage built in JavaScript ES6 Promises
 // Connect to the Mongo DB
 mongoose.Promise = Promise;
@@ -94,6 +107,47 @@ app.get("/scrape", function(req, res) {
         // If an error occurred, send it to the client
         res.json(err);
       });
+  });
+
+  // Route for getting all Articles from the db
+  app.get("/articles", function(req, res) {
+    // Grab every document in the Articles collection
+    db.Article
+      .find({})
+      .then(function(dbArticle) {
+        // If we were able to successfully find Articles, send them back to the client
+
+        var hbsObject = {
+          articles: dbArticle
+        };
+      //  console.log("his is the burgers data object " + JSON.stringify(hbsObject));
+        res.render("index", hbsObject);
+
+
+        //res.json(dbArticle);
+      })
+      .catch(function(err) {
+        // If an error occurred, send it to the client
+        res.json(err);
+      });
+  });
+
+
+  app.delete("/articles/:id", function(req,res)
+  {
+    console.log("deleting article - server " + req.params.id);
+    db.Article
+      .remove({_id: req.params.id})
+      .then(function(dbNote) {
+          console.log("deleted article");
+          res.json(req.params.id);
+
+      })
+      .catch(function(err) {
+        // If an error occurred, send it to the client
+        res.json(err);
+      });
+
   });
 
   // Start the server

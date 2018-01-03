@@ -1,0 +1,57 @@
+<nav class="navbar is-fixed-top is-primary" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item">
+    <span>Saved Articles</span>
+    </a>
+  </div>
+    <div class="navbar-menu">
+      <div class="navbar-start">
+          <hr class="navbar-divider"></hr>
+          <a  href="/" class="navbar-item is-lrg">
+            Home
+          </a>
+          <a class="navbar-item is-lrg">
+            Saved Articles
+          </a>
+
+
+        <!-- navbar items -->
+      </div>
+    <!-- navbar items, navbar burger... -->
+  </div>
+</nav>
+
+
+<div class="container is-fluid">
+  <div class="box articles" id="articles">
+        <h1></h1>
+        <p></p>
+
+      </div>
+      <div id="articles2"></div>
+      <div id="notes"></div>
+
+</div>
+
+
+
+
+   <div class="container is-fluid">
+    {{#each articles}}
+      <div class="box">
+         <h2 class="title is-3">
+         <a href= "{{this.link}}">{{this.title}}</a>
+         </h2>
+          <br>
+          <p>
+          {{this.summary}}
+          </p>
+          <br>
+          <button class="button is-primary articleNotes" >Article Notes</button>
+          <br></br>
+          <button id="deleteButton" class="button is-danger deleteArticle" data-id="{{this._id}}">Delete From Saved</button>
+          <br>
+      </div>
+    {{/each}}
+
+</div>
