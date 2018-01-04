@@ -15,13 +15,12 @@ $(document).on("click", "#scrapeButton", function() {
 
         let button = $("<button>").text("Save Article").addClass("button is-primary");
 
-        //button.addClass("is-primary");
         button.data("article", data[i]);
 
         let d = $("<div>").addClass("box");
-        let p = $("<p>").append(titleLinked).append("<br/>" + "<br/>" + data[i].summary);
+        let p = $("<p>").append(titleLinked).append("<br>" + "<br>" + data[i].summary + "<br>");
 
-        d.append(p).append(button);
+        d.append(p).append("<br>").append(button);
 
         $("#articles").append(d).append("<br>" + "</br>");
 

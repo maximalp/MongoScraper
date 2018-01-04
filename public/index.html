@@ -9,48 +9,48 @@
     <link rel="stylesheet" href="../public/styles.css" type="text/css"/>
   </head>
 
-<body>
-  <nav class="navbar is-fixed-top is-primary" role="navigation" aria-label="main navigation">
-    <div class="navbar-brand">
-      <a class="navbar-item">
-      <span>Mongo Scraper</span>
-      </a>
-    </div>
-      <div class="navbar-menu">
-        <div class="navbar-start">
-            <hr class="navbar-divider"></hr>
-            <a href="/" class="navbar-item is-lrg">
-              Home
-            </a>
-            <a href="/articles" class="navbar-item is-lrg">
-              Saved Articles
-            </a>
-            <div class="navbar-item is-lrg">
-              <a class="button is-link" id="scrapeButton">
-              Scrape New Articles!
+  <body>
+    <nav class="navbar is-fixed-top is-primary" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <a class="navbar-item">
+        <span>Mongo Scraper</span>
+        </a>
+      </div>
+        <div class="navbar-menu">
+          <div class="navbar-start">
+              <hr class="navbar-divider"></hr>
+              <a href="/" class="navbar-item is-lrg">
+                Home
               </a>
-            </div>
+              <a href="/articles" class="navbar-item is-lrg">
+                Saved Articles
+              </a>
+              <div class="navbar-item is-lrg">
+                <a class="button is-link" id="scrapeButton">
+                Scrape New Articles!
+                </a>
+              </div>
 
-          <!-- navbar items -->
-        </div>
-      <!-- navbar items, navbar burger... -->
+            <!-- navbar items -->
+          </div>
+        <!-- navbar items, navbar burger... -->
+      </div>
+    </nav> <!-- end nav bar -->
+
+    <br></br>
+
+    <div class="container is-fluid">
+      <div id="articles">
+      <br>
+      </div>
+          <div id="articles2"></div>
+          <div id="notes"></div>
     </div>
 
 
-  </nav>
 
 
-  <div class="container is-fluid">
-    <div id="articles">
-    </div>
-        <div id="articles2"></div>
-        <div id="notes"></div>
-  </div>
-
-
-
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="app.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+      <script src="app.js"></script>
   </body>
 </html>
